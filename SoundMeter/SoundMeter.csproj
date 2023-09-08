@@ -30,5 +30,8 @@
       <Compile Update="Styles\LargeLabelControl.cs">
         <DependentUpon>LargeLabelControl.axaml</DependentUpon>
       </Compile>
+      <Compile Update="Styles\PopupControl.cs">
+        <DependentUpon>PopupControl.axaml</DependentUpon>
+      </Compile>
     </ItemGroup>
 </Project>

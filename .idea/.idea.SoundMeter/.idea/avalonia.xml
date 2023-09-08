@@ -8,6 +8,7 @@
         <entry key="SoundMeter/Styles/LargeLabelControl.axaml" value="SoundMeter/SoundMeter.csproj" />
         <entry key="SoundMeter/Styles/LargeLabelControl.axaml.axaml" value="SoundMeter/SoundMeter.csproj" />
         <entry key="SoundMeter/Styles/Popup.axaml" value="SoundMeter/SoundMeter.csproj" />
+        <entry key="SoundMeter/Styles/PopupControl.axaml" value="SoundMeter/SoundMeter.csproj" />
         <entry key="SoundMeter/Views/MainWindow.axaml" value="SoundMeter/SoundMeter.csproj" />
       </map>
     </option>

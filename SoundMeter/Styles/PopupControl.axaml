@@ -1,0 +1,71 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:SoundMeter"
+        xmlns:viewModels="clr-namespace:SoundMeter.ViewModels"
+        x:DataType="viewModels:MainWindowViewModel">
+    
+    <Design.PreviewWith>
+        <Border Background="White" Padding="600">
+            <StackPanel>
+                <controls:PopupControl Margin="0,0,0,20" />
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+        
+    <Style Selector="FlyoutPresenter.mySpecialClass">
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Background" Value="White"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="CornerRadius" Value="0" />
+    </Style>
+    
+    <Style Selector="ListBox.mySpecialClass">
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="Background" Value="White"></Setter>
+    </Style>
+    
+    <Style Selector="Expander">
+        <Setter Property="Margin" Value="-18" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="Background" Value="White"></Setter>
+    </Style>
+    
+    <Style Selector="Button.expanderButton">
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="8, 4" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+
+    </Style>
+    
+    <Style Selector="controls|PopupControl">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Button Classes="big" Grid.Column="0" Name="ChannelConfigurationButton" Margin="0,0,8,0" Content="STEREO">
+                    <Button.Flyout>
+                        <Flyout FlyoutPresenterClasses="mySpecialClass" Placement="TopEdgeAlignedLeft">
+                            <ListBox Classes="mySpecialClass" Name="ChannelConfigurationListBox" Grid.Column="1" ItemsSource="{Binding ChannelConfigurations}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Expander IsExpanded="False">
+                                            <Expander.Header>
+                                                <TextBlock Text="{Binding Group}" />
+                                            </Expander.Header>
+                                            <Button Classes="expanderButton" Content="{Binding Text}" />
+                                        </Expander>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Flyout>
+                    </Button.Flyout>
+                </Button>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>
