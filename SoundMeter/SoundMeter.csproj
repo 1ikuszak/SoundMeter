@@ -27,8 +27,8 @@
 
 
     <ItemGroup>
-      <Compile Update="Styles\LargeLabelControl.axaml.cs">
-        <DependentUpon>LargeLabelControl.axaml.axaml</DependentUpon>
+      <Compile Update="Styles\LargeLabelControl.cs">
+        <DependentUpon>LargeLabelControl.axaml</DependentUpon>
       </Compile>
     </ItemGroup>
 </Project>

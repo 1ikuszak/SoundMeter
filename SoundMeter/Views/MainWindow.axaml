@@ -129,7 +129,26 @@
 		<!-- Bottom bar -->
 		<Border Grid.Row="2" Background="white">
 			<Grid Margin="20, 0" Height="46" ColumnDefinitions="Auto, *, Auto, Auto, *, Auto" VerticalAlignment="Center">
-				<Button Classes="big" Grid.Column="0" Name="ChannelConfigurationButton" Margin="0,0,8,0">STEREO</Button>
+				<Button Classes="big" Grid.Column="0" Name="ChannelConfigurationButton" Margin="0,0,8,0" Content="STEREO">
+					<Button.Flyout>
+						
+						<Flyout Placement="TopEdgeAlignedLeft" ShowMode="Transient">
+							<ListBox Name="ChannelConfigurationListBox" Grid.Column="1" ItemsSource="{Binding ChannelConfigurations}">
+								<ListBox.ItemTemplate>
+									<DataTemplate>
+										<Expander IsExpanded="False">
+											<Expander.Header>
+												<TextBlock Text="{Binding Group}" />
+											</Expander.Header>
+											<Button Content="{Binding Text}" />
+										</Expander>
+									</DataTemplate>
+								</ListBox.ItemTemplate>
+							</ListBox>
+						</Flyout>
+						
+					</Button.Flyout>
+				</Button>
 				<Button Classes="big" Grid.Column="1" >DEFAULT</Button>
 				<Button Classes="big" Grid.Column="2" Margin="0,0,8,0">10 SEC</Button>
 				<Button Classes="big_active" Grid.Column="3" >CONTINUOUS</Button>

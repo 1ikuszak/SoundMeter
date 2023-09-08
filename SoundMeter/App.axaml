@@ -12,7 +12,7 @@
     <Application.Styles>
         <FluentTheme />
         <!-- component sharing -->
-        <StyleInclude Source="/Styles/LargeLabelControl.axaml.axaml"></StyleInclude>
+        <StyleInclude Source="/Styles/LargeLabelControl.axaml"></StyleInclude>
         <StyleInclude Source="/Styles/Buttons.axaml"></StyleInclude>
     </Application.Styles>
      

@@ -21,7 +21,10 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [D:/code/c\#/SoundMeter/SoundMeter/Styles/Buttons.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[D:/code/c\#/SoundMeter/SoundMeter/Styles/LargeLabelControl.axaml.axaml]
+[D:/code/c\#/SoundMeter/SoundMeter/Styles/LargeLabelControl.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[D:/code/c\#/SoundMeter/SoundMeter/Styles/Popup.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [D:/code/c\#/SoundMeter/SoundMeter/Views/MainWindow.axaml]

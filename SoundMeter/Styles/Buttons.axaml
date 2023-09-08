@@ -12,6 +12,10 @@
             </StackPanel>
         </Border>
     </Design.PreviewWith>
+    
+    <Style Selector="FlyoutPresenter.mySpecialClass">
+        <Setter Property="Background" Value="Red" />
+    </Style>
 
     <Style Selector="Button.icon">
             <Setter Property="Background" Value="Transparent"></Setter>
