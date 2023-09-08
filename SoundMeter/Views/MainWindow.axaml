@@ -3,7 +3,8 @@
         xmlns:vm="using:SoundMeter.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        xmlns:controls="clr-namespace:SoundMeter"
+        mc:Ignorable="d" d:DesignWidth="1048" d:DesignHeight="630"
         x:Class="SoundMeter.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
@@ -15,6 +16,135 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    	<Grid Name="MainGrid" RowDefinitions="Auto, *, Auto">
+		    
+		
+		<!-- Top bar -->
+		<Grid Grid.Row="0" Margin="10,5,10,0" VerticalAlignment="Center" Height="40" ColumnDefinitions="Auto, Auto, *, Auto, Auto">
+			<!-- Left buttons -->
+			<Button Classes="icon" Grid.Column="0">
+				<Image Source="{SvgImage /Assets/Images/monitor.svg}" Width="20"/>
+			</Button>
+			<Button Classes="icon" Grid.Column="1">
+				<Image Source="{SvgImage /Assets/Images/lock.svg}" Width="16"/>
+			</Button>
+			<!-- app name -->
+			<StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+				<Label FontSize="20">AUDIO</Label>
+				<Label FontWeight="Black" FontSize="20">WAVER</Label>
+				<Image Source="{SvgImage /Assets/Images/wave.svg}" Margin="4,0,0,0" Width="16"/>
+			</StackPanel>
+			<!-- Right buttons -->
+			<Button Classes="icon" Grid.Column="3">
+				<Image Source="{SvgImage /Assets/Images/export.svg}" Width="20"/>
+			</Button>
+			<Button Classes="icon" Grid.Column="4">
+				<Image Source="{SvgImage /Assets/Images/cog.svg}" Width="20"/>
+			</Button>
+		</Grid>
+		
+		<!-- Main section -->
+		<Grid Grid.Row="1" ColumnDefinitions="Auto, Auto, *" Margin="20, 16">
+			<Border Grid.Column="0" BorderBrush="Transparent" BorderThickness="1">
+				<!-- Volume Meter Section -->
+				<Grid RowDefinitions="*, Auto, Auto">
+					<!-- Volume Meter Gauge -->
+					<Grid Grid.Row="0" Grid.Column="0" RowDefinitions="3*, 3*, 3*, 9*, 5*, 4*, 9*, 9*, 9*, 6*, Auto"
+                              ColumnDefinitions="Auto, *, Auto, Auto">
+						<!--legend style -->
+						<Grid.Styles>
+							<Style Selector="Label">
+								<Setter Property="FontSize" Value="10" />
+								<Setter Property="Foreground" Value="Black" />
+								<Setter Property="HorizontalAlignment" Value="Right" />
+							</Style>
+						</Grid.Styles>
+						<!-- legend -->
+						<Label Grid.Column="0" Grid.Row="0">0 —</Label>
+						<Label Grid.Column="0" Grid.Row="1">-3 —</Label>
+						<Label Grid.Column="0" Grid.Row="2">-6 —</Label>
+						<Label Grid.Column="0" Grid.Row="3">-9 —</Label>
+						<Label Grid.Column="0" Grid.Row="4">-18 —</Label>
+						<Label Grid.Column="0" Grid.Row="5">-23 —</Label>
+						<Label Grid.Column="0" Grid.Row="6">-27 —</Label>
+						<Label Grid.Column="0" Grid.Row="7">-36 —</Label>
+						<Label Grid.Column="0" Grid.Row="8">-45 —</Label>
+						<Label Grid.Column="0" Grid.Row="9">-54 —</Label>
+						<Label Grid.Column="0" Grid.Row="10"></Label>
+						<!-- Volume Bar -->
+						<Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="11" RowDefinitions="23*, 37*">
+							<Border Grid.Row="0"  Background="#E72626" Width="45" CornerRadius="4, 4, 0 ,0" Margin="0,8,0,-10"></Border>
+							<Border Grid.Row="1"  Background="#1D1D1D" Width="45" CornerRadius="0, 0, 4 ,4" Margin="0,8,0,-10"></Border>
+						</Grid>
+						<Label Grid.Column="2" Grid.Row="0">—</Label>
+						<Label Grid.Column="2" Grid.Row="1">—</Label>
+						<Label Grid.Column="2" Grid.Row="2">—</Label>
+						<Label Grid.Column="2" Grid.Row="3">—</Label>
+						<Label Grid.Column="2" Grid.Row="4">—</Label>
+						<Label Grid.Column="2" Grid.Row="5">—</Label>
+						<Label Grid.Column="2" Grid.Row="6">—</Label>
+						<Label Grid.Column="2" Grid.Row="7">—</Label>
+						<Label Grid.Column="2" Grid.Row="8">—</Label>
+						<Label Grid.Column="2" Grid.Row="9">—</Label>
+						<Label Grid.Column="2" Grid.Row="10"></Label>
+						<!-- Arrow -->
+						<Canvas Grid.Row="0" Grid.Column="3" Grid.RowSpan="11" Width="20">
+							<Image Source="{SvgImage /Assets/Images/arrow_meter.svg}" Height="18"/>
+						</Canvas>
+					</Grid>
+					<!-- LUFS label -->
+					<Label Grid.Row="1" Foreground="Black" FontWeight="Bold" FontSize="26" HorizontalAlignment="Center" Margin="0, 20,0,0">LUFS</Label>
+					<!-- LUFS controls -->
+					<StackPanel Grid.Row="2" Margin="0,8" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+						<Button Classes="small" Margin="0,0,8, 0" Padding="8, 6">
+							<Image Source="{SvgImage /Assets/Images/skip.svg}" Height="12"/>
+						</Button>
+						<Button Classes="small">INT-LRA</Button>
+					</StackPanel>
+				</Grid>
+			</Border>
+			<!-- dynamic info -->
+			<Grid Grid.Column="1" RowDefinitions="*, Auto">
+				<StackPanel Grid.Row="0" Margin="10,0" Width="220">
+					<controls:LargeLabelControl LargeText="-20.8 LUFS" SmallText="SHORT TERM"></controls:LargeLabelControl>
+					<controls:LargeLabelControl LargeText="-20.8 LUFS" SmallText="INTEGRATED" Background="{DynamicResource Light2}"></controls:LargeLabelControl>
+					<controls:LargeLabelControl LargeText="23.5 LU" SmallText="LOUDNESS RANGE"></controls:LargeLabelControl>
+					<controls:LargeLabelControl LargeText="15.7 LU" SmallText="REALTIME DYNAMICS"></controls:LargeLabelControl>
+					<controls:LargeLabelControl LargeText="21.5 LU" SmallText="AVG. DYNAMICS (PLR)" Margin="0,0,0,20"></controls:LargeLabelControl>
+					<controls:LargeLabelControl Classes="button" LargeText="-9.8 LUFS" SmallText="MOMENTARY MAX"></controls:LargeLabelControl>
+					<controls:LargeLabelControl Classes="button" LargeText="-15.0 LUFS" SmallText="SHORT TERM MAX"></controls:LargeLabelControl>
+					<controls:LargeLabelControl Classes="button" LargeText="-0.3 dB" SmallText="TRUE PEAK MAX" Margin="0,0,0,20"></controls:LargeLabelControl>
+				</StackPanel>
+				<StackPanel Grid.Row="1" Margin="0,8" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+					<Button Classes="small" Margin="0,0,8, 0" Padding="8, 6">
+						<Image Source="{SvgImage /Assets/Images/close.svg}" Height="12"/>
+					</Button>
+					<Button Classes="small">AUTO</Button>
+				</StackPanel>
+			</Grid>
+			<!-- graph -->
+			<Border Grid.Column="2" BorderThickness="1" BorderBrush="Black"></Border>
+		</Grid>
+		
+		<!-- Bottom bar -->
+		<Border Grid.Row="2" Background="white">
+			<Grid Margin="20, 0" Height="46" ColumnDefinitions="Auto, *, Auto, Auto, *, Auto" VerticalAlignment="Center">
+				<Button Classes="big" Grid.Column="0" Name="ChannelConfigurationButton" Margin="0,0,8,0">STEREO</Button>
+				<Button Classes="big" Grid.Column="1" >DEFAULT</Button>
+				<Button Classes="big" Grid.Column="2" Margin="0,0,8,0">10 SEC</Button>
+				<Button Classes="big_active" Grid.Column="3" >CONTINUOUS</Button>
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="4" Margin="50,0,0,0">
+					<Button Classes="circle_active">S</Button>
+					<Button Classes="circle" Padding="5,2">M</Button>
+					<Button Classes="circle_active">T</Button>
+					<Button Classes="circle">D</Button>
+					<Button Classes="circle">G</Button>
+				</StackPanel>
+				<Button Classes="icon" Grid.Column="5">
+					<Image Source="{SvgImage /Assets/Images/record.svg}" Width="14"/>
+				</Button>
+			</Grid>
+		</Border>
+	</Grid>
 
 </Window>

@@ -18,5 +18,11 @@ build_property.ProjectDir = D:\code\c#\SoundMeter\SoundMeter\
 [D:/code/c\#/SoundMeter/SoundMeter/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[D:/code/c\#/SoundMeter/SoundMeter/Styles/Buttons.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[D:/code/c\#/SoundMeter/SoundMeter/Styles/LargeLabelControl.axaml.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [D:/code/c\#/SoundMeter/SoundMeter/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

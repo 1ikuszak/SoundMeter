@@ -1,0 +1,150 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Background="White" Padding="20">
+            <StackPanel>
+                <Button Classes="small">SAMPLE TEXT</Button>
+                <Button Classes="big">SAMPLE TEXT</Button>
+                <Button Classes="big_active">SAMPLE TEXT</Button>
+                <Button Classes="circle">SAMPLE TEXT</Button>
+                <Button Classes="circle_active">SAMPLE TEXT</Button>
+                <Button Classes="icon">SAMPLE TEXT</Button>
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <Style Selector="Button.icon">
+            <Setter Property="Background" Value="Transparent"></Setter>
+        </Style>
+        <Style Selector="Button.icon /template/ContentPresenter">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.1"></TransformOperationsTransition>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Button.icon:pointerover /template/ContentPresenter">
+            <Setter Property="RenderTransform" Value="scale(1.06)"></Setter>
+            <Setter Property="Opacity" Value="0.4"/>
+        </Style>
+        
+        <Style Selector="Button.small">
+            <Setter Property="Background" Value="White"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="BorderBrush" Value="Black"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="CornerRadius" Value="4"></Setter>
+            <Setter Property="Padding" Value="8,4"></Setter>
+            <Setter Property="FontSize" Value="12"></Setter>
+        </Style>
+        <Style Selector="Button.small /template/ContentPresenter">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <!-- <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.1"></TransformOperationsTransition> -->
+                    <BrushTransition Property="Background" Duration="0:0:0.1"></BrushTransition>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Button.small:pointerover /template/ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource Light2}"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="BorderBrush" Value="Black"></Setter>
+            <Setter Property="CornerRadius" Value="4"></Setter>
+            <!-- <Setter Property="RenderTransform" Value="scale(1.06)"></Setter> -->
+        </Style>
+        <Style Selector="TextBlock">
+            <Setter Property="FontFamily" Value="YourFontFamilyName, Arial, sans-serif" />
+        </Style>
+        
+        <Style Selector="Button.big">
+            <Setter Property="Background" Value="{DynamicResource Light1}"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="BorderBrush" Value="Black"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="CornerRadius" Value="4"></Setter>
+            <Setter Property="Padding" Value="14,6"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+        </Style>
+        <Style Selector="Button.big /template/ContentPresenter">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.1"></BrushTransition>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Button.big:pointerover /template/ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource Light2}"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="BorderBrush" Value="Black"></Setter>
+        </Style>
+        <Style Selector="TextBlock">
+            <Setter Property="FontFamily" Value="YourFontFamilyName, Arial, sans-serif" />
+        </Style>
+        
+        <Style Selector="Button.big_active">
+            <Setter Property="Background" Value="Black"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="CornerRadius" Value="4"></Setter>
+            <Setter Property="Padding" Value="14,6"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+        </Style>
+        <Style Selector="Button.big_active /template/ContentPresenter">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.1"></BrushTransition>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Button.big_active:pointerover /template/ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource Dark}"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+        </Style>
+        
+        <Style Selector="Button.circle">
+            <Setter Property="Background" Value="{DynamicResource Light2}"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="CornerRadius" Value="100"></Setter>
+            <Setter Property="Padding" Value="6,2"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Margin" Value="3, 0"></Setter>
+        </Style>
+        <Style Selector="Button.circle /template/ContentPresenter">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.1"></BrushTransition>
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.1"></BrushTransition>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Button.circle:pointerover /template/ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource Light1}"></Setter>
+            <Setter Property="BorderBrush" Value="Black"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+        </Style>
+        
+        <Style Selector="Button.circle_active">
+            <Setter Property="Background" Value="White"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="CornerRadius" Value="100"></Setter>
+            <Setter Property="Padding" Value="6,2"></Setter>
+            <Setter Property="BorderBrush" Value="Black"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Margin" Value="3, 0"></Setter>
+        </Style>
+        <Style Selector="Button.circle_active /template/ContentPresenter">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.1"></BrushTransition>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Button.circle_active:pointerover /template/ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource Light2}"></Setter>
+            <Setter Property="BorderBrush" Value="Black"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+        </Style>
+        
+        <Style Selector="TextBlock">
+            <Setter Property="FontFamily" Value="YourFontFamilyName, Arial, sans-serif" />
+        </Style>
+</Styles>

@@ -3,6 +3,10 @@
   <component name="AvaloniaProject">
     <option name="projectPerEditor">
       <map>
+        <entry key="SoundMeter/App.axaml" value="SoundMeter/SoundMeter.csproj" />
+        <entry key="SoundMeter/Styles/Buttons.axaml" value="SoundMeter/SoundMeter.csproj" />
+        <entry key="SoundMeter/Styles/LargeLabelControl.axaml" value="SoundMeter/SoundMeter.csproj" />
+        <entry key="SoundMeter/Styles/LargeLabelControl.axaml.axaml" value="SoundMeter/SoundMeter.csproj" />
         <entry key="SoundMeter/Views/MainWindow.axaml" value="SoundMeter/SoundMeter.csproj" />
       </map>
     </option>
