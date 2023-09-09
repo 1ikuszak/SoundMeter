@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using ReactiveUI;
 using SoundMeter.DataModels;
@@ -9,27 +10,25 @@ namespace SoundMeter.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        private readonly IAudioInterfaceService _audioInterfaceService;
+        private List<IGrouping<string, ChannelConfigurationItem>> _channelConfigurations;
 
-        public MainWindowViewModel(IAudioInterfaceService audioInterfaceService)
-        {
-            _audioInterfaceService = audioInterfaceService;
-            LoadChannelConfiguration();
-        }
-
-        private ObservableCollection<ChannelConfigurationItem> _channelConfigurations;
-        public ObservableCollection<ChannelConfigurationItem> ChannelConfigurations
+        public List<IGrouping<string, ChannelConfigurationItem>> ChannelConfigurations
         {
             get => _channelConfigurations;
             set => this.RaiseAndSetIfChanged(ref _channelConfigurations, value);
         }
+        
 
-        public async Task LoadChannelConfiguration()
+        public MainWindowViewModel(IAudioInterfaceService audioInterfaceService)
         {
-            var configurations = await _audioInterfaceService.GetChannelConfigurationAsync();
-            ChannelConfigurations = new ObservableCollection<ChannelConfigurationItem>(configurations);
+            Initialize(audioInterfaceService);
         }
 
-        public string Greeting => "Welcome to Avalonia!";
+        private async void Initialize(IAudioInterfaceService audioInterfaceService)
+        {
+            var channelConfigurations = await audioInterfaceService.GetChannelConfigurationAsync();
+            ChannelConfigurations = channelConfigurations;
+        }
     }
+
 }

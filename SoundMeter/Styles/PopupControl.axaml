@@ -11,8 +11,8 @@
             </StackPanel>
         </Border>
     </Design.PreviewWith>
-        
-    <Style Selector="FlyoutPresenter.mySpecialClass">
+    
+    <Style Selector="FlyoutPresenter.popup">
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Background" Value="White"></Setter>
@@ -20,48 +20,49 @@
         <Setter Property="CornerRadius" Value="0" />
     </Style>
     
-    <Style Selector="ListBox.mySpecialClass">
-        <Setter Property="CornerRadius" Value="0" />
-        <Setter Property="Background" Value="White"></Setter>
-    </Style>
-    
-    <Style Selector="Expander">
-        <Setter Property="Margin" Value="-18" />
+    <Style Selector="Expander.expander_popup">
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="2" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="CornerRadius" Value="0" />
         <Setter Property="Background" Value="White"></Setter>
     </Style>
     
-    <Style Selector="Button.expanderButton">
+    <Style Selector="Button.expander_btn">
         <Setter Property="Margin" Value="0" />
-        <Setter Property="Padding" Value="8, 4" />
-        <Setter Property="Background" Value="White" />
-        <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-
+        <Setter Property="Padding" Value="2" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="Background" Value="White"></Setter>
     </Style>
+
     
     <Style Selector="controls|PopupControl">
         <!-- Set Defaults -->
         <Setter Property="Template">
             <ControlTemplate>
-                <Button Classes="big" Grid.Column="0" Name="ChannelConfigurationButton" Margin="0,0,8,0" Content="STEREO">
+                <Button Classes="big" Name="ChannelConfigurationButton" Margin="0,0,8,0" Content="STEREO">
                     <Button.Flyout>
-                        <Flyout FlyoutPresenterClasses="mySpecialClass" Placement="TopEdgeAlignedLeft">
-                            <ListBox Classes="mySpecialClass" Name="ChannelConfigurationListBox" Grid.Column="1" ItemsSource="{Binding ChannelConfigurations}">
-                                <ListBox.ItemTemplate>
+                        <Flyout FlyoutPresenterClasses="popup" Placement="TopEdgeAlignedLeft">
+                            <ItemsControl ItemsSource="{Binding ChannelConfigurations}">
+                                <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Expander IsExpanded="False">
+                                        <Expander Classes="expander_popup">
                                             <Expander.Header>
-                                                <TextBlock Text="{Binding Group}" />
+                                                <Label Content="{Binding Key}"></Label>
                                             </Expander.Header>
-                                            <Button Classes="expanderButton" Content="{Binding Text}" />
+                                            
+                                            <ItemsControl ItemsSource="{Binding}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Button Classes="expander_btn" Content="{Binding Text}"></Button>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
                                         </Expander>
                                     </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </Flyout>
                     </Button.Flyout>
                 </Button>

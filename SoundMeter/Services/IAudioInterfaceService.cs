@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using SoundMeter.DataModels;
 
@@ -10,5 +11,5 @@ public interface IAudioInterfaceService
     /// Fetch the channel configuration
     /// </summary>
     /// <returns></returns>
-    Task<List<ChannelConfigurationItem>> GetChannelConfigurationAsync();
+    Task<List<IGrouping<string, ChannelConfigurationItem>>> GetChannelConfigurationAsync();
 }
