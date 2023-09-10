@@ -41,7 +41,7 @@
         <!-- Set Defaults -->
         <Setter Property="Template">
             <ControlTemplate>
-                <Button Classes="big" Name="ChannelConfigurationButton" Margin="0,0,8,0" Content="STEREO">
+                <Button Content="{Binding SelectedChannel}"  Classes="big" Name="ChannelConfigurationButton" Margin="0,0,8,0" >
                     <Button.Flyout>
                         <Flyout FlyoutPresenterClasses="popup" Placement="TopEdgeAlignedLeft">
                             <ItemsControl ItemsSource="{Binding ChannelConfigurations}">
@@ -55,7 +55,10 @@
                                             <ItemsControl ItemsSource="{Binding}">
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>
-                                                        <Button Classes="expander_btn" Content="{Binding Text}"></Button>
+                                                        <Button Classes="expander_btn"
+                                                                Content="{Binding Text}"
+                                                                Command="{Binding $parent[controls:PopupControl].((viewModels:MainWindowViewModel)DataContext).ExpanderButtonClickCommand, FallbackValue=null}"
+                                                                CommandParameter="{Binding ShortText}" />
                                                     </DataTemplate>
                                                 </ItemsControl.ItemTemplate>
                                             </ItemsControl>

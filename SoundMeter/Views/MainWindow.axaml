@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:SoundMeter"
-        mc:Ignorable="d" d:DesignWidth="1048" d:DesignHeight="630"
+        mc:Ignorable="d" d:DesignWidth="1048" d:DesignHeight="620"
+        Width="1048" Height="620" 
         x:Class="SoundMeter.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
@@ -129,7 +130,7 @@
 		<!-- Bottom bar -->
 		<Border Grid.Row="2" Background="white">
 			<Grid Margin="20, 0" Height="46" ColumnDefinitions="Auto, *, Auto, Auto, *, Auto" VerticalAlignment="Center">
-				<controls:PopupControl></controls:PopupControl>
+				<controls:PopupControl Grid.Column="0"></controls:PopupControl>
 				<Button Classes="big" Grid.Column="1" >DEFAULT</Button>
 				<Button Classes="big" Grid.Column="2" Margin="0,0,8,0">10 SEC</Button>
 				<Button Classes="big_active" Grid.Column="3" >CONTINUOUS</Button>
