@@ -29,5 +29,8 @@ public partial class MainWindow : Window
         {
             UpdateSizes();
         };
+        
+        // Start recording
+        AudioCaptureService.DemoTwoChannel(4);
     }
 }

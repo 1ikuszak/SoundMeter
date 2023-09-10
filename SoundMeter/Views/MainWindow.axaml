@@ -89,7 +89,7 @@
 						<Label Grid.Column="2" Grid.Row="9">—</Label>
 						<Label Grid.Column="2" Grid.Row="10"></Label>
 						<!-- Arrow -->
-						<Canvas Name="VolumeContainer" Grid.Row="0" Grid.Column="3" Grid.RowSpan="11" Width="12" Background="Aqua">
+						<Canvas Name="VolumeContainer" Grid.Row="0" Grid.Column="3" Grid.RowSpan="11" Width="12">
 							<Image Canvas.Top="{Binding VolumePercentPosition}" Source="{SvgImage /Assets/Images/arrow_meter.svg}" Width="12"/>
 						</Canvas>
 					</Grid>

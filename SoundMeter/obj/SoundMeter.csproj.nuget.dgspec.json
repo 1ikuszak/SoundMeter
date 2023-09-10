@@ -76,6 +76,10 @@
             "Avalonia.Xaml.Interactivity": {
               "target": "Package",
               "version": "[11.0.2, )"
+            },
+            "NAudio": {
+              "target": "Package",
+              "version": "[2.2.1, )"
             }
           },
           "imports": [
