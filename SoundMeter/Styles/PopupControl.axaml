@@ -41,9 +41,11 @@
         <!-- Set Defaults -->
         <Setter Property="Template">
             <ControlTemplate>
-                <Button Content="{Binding SelectedChannel}"  Classes="big" Name="ChannelConfigurationButton" Margin="0,0,8,0" >
+                <Button Content="{Binding SelectedChannel}"  Classes="big" Name="ChannelConfigurationButton" HorizontalContentAlignment="Center" Padding="0" Width="94" Margin="0,0,8,0" >
                     <Button.Flyout>
-                        <Flyout FlyoutPresenterClasses="popup" Placement="TopEdgeAlignedLeft">
+                        <Flyout FlyoutPresenterClasses="popup"
+                                Placement="TopEdgeAlignedLeft">
+                            
                             <ItemsControl ItemsSource="{Binding ChannelConfigurations}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
