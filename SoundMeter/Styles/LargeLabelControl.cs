@@ -6,7 +6,7 @@ namespace SoundMeter;
 public class LargeLabelControl : TemplatedControl
 {
     public static readonly StyledProperty<string> LargeTextProperty = AvaloniaProperty.Register<LargeLabelControl, string>(
-        nameof(LargeText), defaultValue:"SMALL TEXT");
+        nameof(LargeText), defaultValue:"SMALL");
 
     public string LargeText
     {
@@ -14,8 +14,17 @@ public class LargeLabelControl : TemplatedControl
         set => SetValue(LargeTextProperty, value);
     }
 
+    public static readonly StyledProperty<string> UnitProperty = AvaloniaProperty.Register<LargeLabelControl, string>(
+        nameof(Unit), defaultValue:"LUTS");
+
+    public string Unit
+    {
+        get => GetValue(UnitProperty);
+        set => SetValue(UnitProperty, value);
+    }
+
     public static readonly StyledProperty<string> SmallTextProperty = AvaloniaProperty.Register<LargeLabelControl, string>(
-        nameof(SmallText), defaultValue:"LARGE TEXT");
+        nameof(SmallText), defaultValue:"LARGE");
 
     public string SmallText
     {

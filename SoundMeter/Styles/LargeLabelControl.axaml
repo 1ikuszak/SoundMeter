@@ -17,7 +17,10 @@
             <ControlTemplate>
                 <Border Padding="15,7" Background="{TemplateBinding Background}">
                     <StackPanel>
-                        <Label HorizontalAlignment="Center" Padding="0" FontSize="21" Content="{TemplateBinding LargeText}"/>
+                        <Grid ColumnDefinitions="*, Auto">
+                                <Label Grid.Column="0" Margin="36,0,0,0" Padding="0" FontSize="21" Content="{TemplateBinding LargeText}"/>
+                                <Label Grid.Column="1" Margin="0,0,36,0" Padding="0" FontSize="21" Opacity="0.6" Content="{TemplateBinding Unit}"/>
+                        </Grid>
                         <Label HorizontalAlignment="Center" Padding="0" FontSize="10" Content="{TemplateBinding SmallText}"/>
                     </StackPanel>                    
                 </Border>
@@ -33,8 +36,10 @@
             <ControlTemplate>
                     <StackPanel>
                         <Border Padding="15,2" Background="{TemplateBinding Background}" CornerRadius="20">
-                            <Label HorizontalAlignment="Center" Padding="0" FontSize="21" Content="{TemplateBinding LargeText}"/>
-                        </Border>
+                            <Grid ColumnDefinitions="*, Auto">
+                                <Label Grid.Column="0" Margin="36,0,0,0" Padding="0" FontSize="21" Content="{TemplateBinding LargeText}"/>
+                                <Label Grid.Column="1" Margin="0,0,36,0" Padding="0" FontSize="21" Opacity="0.6" Content="{TemplateBinding Unit}"/>
+                            </Grid>                        </Border>
                         <Label Margin="0,2,0,6" HorizontalAlignment="Center" Padding="0" FontSize="10" Content="{TemplateBinding SmallText}"/>
                     </StackPanel>                    
             </ControlTemplate>

@@ -73,9 +73,11 @@
 						<Label Grid.Column="0" Grid.Row="9">-54 —</Label>
 						<Label Grid.Column="0" Grid.Row="10"></Label>
 						<!-- Volume Bar -->
-						<Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="11" RowDefinitions="23*, 37*">
+						<Grid Name="VolumeBar" Grid.Row="0" Grid.Column="1" Grid.RowSpan="11" RowDefinitions="23*, 37*">
 							<Border Grid.Row="0"  Background="#E72626" Width="45" CornerRadius="4, 4, 0 ,0" Margin="0,0,0,-7"></Border>
 							<Border Grid.Row="1"  Background="#1D1D1D" Width="45" CornerRadius="0, 0, 4 ,4" Margin="0,7,0,0"></Border>
+							<Border Grid.Row="0" Grid.RowSpan="2"  Background="White" VerticalAlignment="Top" Height="{Binding VolumeBarMaskHeight}" Width="45" CornerRadius="0, 0, 4 ,4" Margin="0,7,0,0"></Border>
+
 						</Grid>
 						<Label Grid.Column="2" Grid.Row="0">—</Label>
 						<Label Grid.Column="2" Grid.Row="1">—</Label>
@@ -114,7 +116,7 @@
 					<controls:LargeLabelControl LargeText="{Binding AverageDynamics}" SmallText="AVG. DYNAMICS (PLR)" Margin="0,0,0,20"></controls:LargeLabelControl>
 					<controls:LargeLabelControl Classes="button" LargeText="{Binding MomentaryMaxLoudness}" SmallText="MOMENTARY MAX"></controls:LargeLabelControl>
 					<controls:LargeLabelControl Classes="button" LargeText="{Binding ShortTermMaxLoudness}" SmallText="SHORT TERM MAX"></controls:LargeLabelControl>
-					<controls:LargeLabelControl Classes="button" LargeText="{Binding TruePeakMax}" SmallText="TRUE PEAK MAX" Margin="0,0,0,20"></controls:LargeLabelControl>
+					<controls:LargeLabelControl Classes="button" LargeText="{Binding TruePeakMax}" Unit="dB" SmallText="TRUE PEAK MAX" Margin="0,0,0,20"></controls:LargeLabelControl>
 				</StackPanel>
 				<StackPanel Grid.Row="1" Margin="0,8" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 					<Button Classes="small" Margin="0,0,8, 0" Padding="8, 6">

@@ -17,6 +17,7 @@ namespace SoundMeter.ViewModels
     public partial class MainWindowViewModel : ViewModelBase
     {
         private IAudioCaptureService mAudioCaptureService;
+        private int mUpdateCounter;
         
         // Channel configuration list for correct menu
         private List<IGrouping<string, ChannelConfigurationItem>> _channelConfigurations;
@@ -103,11 +104,24 @@ namespace SoundMeter.ViewModels
         }
         
         // Volume Container
-        private double _volumeContainerSize;
-        public double VolumeContainerSize
+        private double _volumeContainerHeight;
+        public double VolumeContainerHeigh
         {
-            get => _volumeContainerSize;
-            set => this.RaiseAndSetIfChanged(ref _volumeContainerSize, value);
+            get => _volumeContainerHeight;
+            set => this.RaiseAndSetIfChanged(ref _volumeContainerHeight, value);
+        }
+        private double _volumeBarHeight;
+        public double VolumeBarHeight
+        {
+            get => _volumeBarHeight;
+            set => this.RaiseAndSetIfChanged(ref _volumeBarHeight, value);
+        }
+        
+        private double _volumeBarMaskHeight;
+        public double VolumeBarMaskHeight
+        {
+            get => _volumeBarMaskHeight;
+            set => this.RaiseAndSetIfChanged(ref _volumeBarMaskHeight, value);
         }
         
         public MainWindowViewModel(IAudioCaptureService audioCaptureService)
@@ -117,30 +131,9 @@ namespace SoundMeter.ViewModels
                 // Update the selected channel
                 SelectedChannel = text;
             });
-            UpdateArrowPosition();
             mAudioCaptureService = new NAdioCaptureService();
             Initialize(audioCaptureService);
         }
-        
-        private void UpdateArrowPosition()
-        {
-            var tick = 0;
-            var input = 0.0;
-
-            var tempTimer = new DispatcherTimer
-            {
-                Interval = TimeSpan.FromSeconds(1 / 120.0)
-            };
-            tempTimer.Tick += (sender, e) =>
-            {
-                tick++;
-                input = tick / 20f;
-                var scale = VolumeContainerSize / 2f;
-                VolumePercentPosition = (Math.Sin(input) + 1) * scale;
-            };
-            tempTimer.Start();
-        }
-
         private async void Initialize(IAudioCaptureService audioCaptureService)
         {
             var channelConfigurations = await mAudioCaptureService.GetChannelConfigurationAsync();
@@ -150,24 +143,41 @@ namespace SoundMeter.ViewModels
         
         private void StartCapture(int deviceId)
         {
-            mAudioCaptureService = new NAdioCaptureService(deviceId);
+            mAudioCaptureService.InitCapture(deviceId);
             
             // Listen out for chunks of information
-            mAudioCaptureService.AudioChunkAvailable += audioChuckData =>
+            mAudioCaptureService.AudioChunkAvailable += audioChunkData =>
             {
-                ShortTermLoudness = $"{audioChuckData.ShortTermLUFS:0.0} LUFS";
-                IntegratedLoudness  = $"{audioChuckData.IntegratedLUFS:0.0} LUFS";
-                LoudnessRange = $"{audioChuckData.LoudnessRange:0.0} LUFS";
-                RealtimeDynamics = $"{audioChuckData.RealtimeDynamics:0.0} LUFS";
-                AverageDynamics = $"{audioChuckData.AverageRealtimeDynamics:0.0} LUFS";
-                MomentaryMaxLoudness = $"{audioChuckData.MomentaryMaxLUFS:0.0} LUFS";
-                ShortTermMaxLoudness = $"{audioChuckData.ShortTermMaxLUFS:0.0} LUFS";
-                TruePeakMax = $"{audioChuckData.TruePeakMax:0.0} dB";
+                ProcessAudioChunkForDisplay(audioChunkData);
             };
         
             // Start capturing
             mAudioCaptureService.Start();
         }
+
+        private void ProcessAudioChunkForDisplay(AudioChunkData audioChunkData)
+        {   
+            // slow down display numbers
+            mUpdateCounter = (mUpdateCounter + 1) % 3;
+            if (mUpdateCounter == 0)
+            {
+                ShortTermLoudness = $"{Math.Max(-60, audioChunkData.ShortTermLUFS):0.0}";
+                IntegratedLoudness  = $"{Math.Max(-60,audioChunkData.IntegratedLUFS):0.0}";
+                LoudnessRange = $"{Math.Max(-60,audioChunkData.LoudnessRange):0.0}";
+                RealtimeDynamics = $"{Math.Max(-60,audioChunkData.RealtimeDynamics):0.0}";
+                AverageDynamics = $"{Math.Max(-60,audioChunkData.AverageRealtimeDynamics):0.0}";
+                MomentaryMaxLoudness = $"{Math.Max(-60,audioChunkData.MomentaryMaxLUFS):0.0}";
+                ShortTermMaxLoudness = $"{Math.Max(-60,audioChunkData.ShortTermMaxLUFS):0.0}";
+                TruePeakMax = $"{Math.Max(-60,audioChunkData.TruePeakMax):0.0}";   
+            }
+            
+            // Set volume bar height
+            VolumeBarMaskHeight = Math.Min(_volumeBarHeight, _volumeBarHeight / 60 * -audioChunkData.ShortTermLUFS);
+            // Set arrow position
+            VolumePercentPosition = Math.Min(_volumeContainerHeight, _volumeContainerHeight / 60 * -audioChunkData.IntegratedLUFS);
+
+        }
+        
 
         public ICommand ExpanderButtonClickCommand { get; }
 

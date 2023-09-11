@@ -21,15 +21,30 @@ public class NAdioCaptureService : IDisposable, IAudioCaptureService
     private int mCaptureFrequency = 44100;
     public event Action<AudioChunkData> AudioChunkAvailable;
 
-    public NAdioCaptureService(int deviceId = 0, int frequency = 44100)
+    public NAdioCaptureService()
     {
+    }
+
+    public void InitCapture(int deviceId = 1, int frequency = 44100)
+    {
+        
         // Initialize WaveInEvent with the specified device ID and audio format
         waveIn = new WaveInEvent
         {
             DeviceNumber = deviceId,
             WaveFormat = new WaveFormat(frequency, 16, 2), // 44.1 kHz, 16-bit, Stereo
-            BufferMilliseconds = 20
+            BufferMilliseconds = 10
         };
+        
+        try
+        {
+            waveIn.Dispose();
+        }
+        catch (Exception e)
+        {
+            // ignore
+        }
+        
         // Subscribe to the DataAvailable event to handle captured audio data
         waveIn.DataAvailable += AudioChunkCaptured;
     }
@@ -76,7 +91,7 @@ public class NAdioCaptureService : IDisposable, IAudioCaptureService
         mLufs.Enqueue(lufs);
             
         // Keep list to 10 samples
-        if (mLufs.Count > 100)
+        if (mLufs.Count > 10)
             mLufs.Dequeue();
 
         // Calculate the average
@@ -85,16 +100,15 @@ public class NAdioCaptureService : IDisposable, IAudioCaptureService
         // Fire off this chunk of information to listeners
         AudioChunkAvailable?.Invoke(new AudioChunkData
         (
-            Loudness: lufs,
-
+            Loudness: averageLufs,
             ShortTermLUFS: averageLufs,
-            IntegratedLUFS:  lufs * 0.9,
-            LoudnessRange: lufs * 0.8,
-            RealtimeDynamics:  lufs * 0.7,
-            AverageRealtimeDynamics:  lufs * 0.6,
-            MomentaryMaxLUFS:  lufs * 0.5,
-            ShortTermMaxLUFS:  lufs * 0.4,
-            TruePeakMax:  lufs * 0.3
+            IntegratedLUFS: averageLufs + (averageLufs * 0.9),
+            LoudnessRange: averageLufs + (averageLufs * 0.8),
+            RealtimeDynamics: averageLufs + (averageLufs * 0.7),
+            AverageRealtimeDynamics: averageLufs + (averageLufs * 0.6),
+            MomentaryMaxLUFS: averageLufs + (averageLufs * 0.5),
+            ShortTermMaxLUFS: averageLufs + (averageLufs * 0.4),
+            TruePeakMax: averageLufs + (averageLufs * 0.3)
             ));
     }
     

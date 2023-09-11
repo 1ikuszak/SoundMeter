@@ -17,13 +17,16 @@ namespace SoundMeter.Views;
 public partial class MainWindow : Window
 {
     public MainWindowViewModel mWindowViewModel => (MainWindowViewModel)DataContext;
-    private Control mVolumeContainer;
-    private Control mLabelControl;
-    private Timer mSizingTimer;
+    private readonly Control mVolumeContainer;
+    private readonly Control mLabelControl;
+    private readonly Timer mSizingTimer;
+    private readonly Control mVolumeBar;
+
 
     private void UpdateSizes()
     {
-        mWindowViewModel.VolumeContainerSize = mVolumeContainer.Bounds.Height;
+        mWindowViewModel.VolumeContainerHeigh = mVolumeContainer.Bounds.Height;
+        mWindowViewModel.VolumeBarHeight = mVolumeBar.Bounds.Height;
     }
 
 
@@ -34,6 +37,8 @@ public partial class MainWindow : Window
         mVolumeContainer = this.FindControl<Control>("VolumeContainer") ??
                            throw new Exception("Cannot find Volume Container by name");
         mVolumeContainer.SizeChanged += (sender, e) => { UpdateSizes(); };
+        mVolumeBar = this.FindControl<Control>("VolumeBar") ??
+                     throw new Exception("Cannot find VolumeBar by name");
     }
     
 }
