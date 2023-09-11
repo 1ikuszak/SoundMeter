@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "nT02x6rXDOGe8wBjKz/WbVehKZIbVm1aRBy8aVtegQZwslJOahOxYqBmLttdxp/D3Irfd1VW0+DSjpBiJILhUA==",
+  "dgSpecHash": "Nm2961M8N+NIKfutqPxzhU+KbmfYJX8XxXGcTOxYAf3vqJhrrUeCMK13HtCt0QThsr735L+DPi5d9eVxLLi4Ug==",
   "success": true,
   "projectFilePath": "D:\\code\\c#\\SoundMeter\\SoundMeter\\SoundMeter.csproj",
   "expectedPackageFiles": [
@@ -48,6 +48,7 @@
     "C:\\Users\\48517\\.nuget\\packages\\naudio.midi\\2.2.1\\naudio.midi.2.2.1.nupkg.sha512",
     "C:\\Users\\48517\\.nuget\\packages\\naudio.wasapi\\2.2.1\\naudio.wasapi.2.2.1.nupkg.sha512",
     "C:\\Users\\48517\\.nuget\\packages\\naudio.winmm\\2.2.1\\naudio.winmm.2.2.1.nupkg.sha512",
+    "C:\\Users\\48517\\.nuget\\packages\\nwaves\\0.9.6\\nwaves.0.9.6.nupkg.sha512",
     "C:\\Users\\48517\\.nuget\\packages\\reactiveui\\18.3.1\\reactiveui.18.3.1.nupkg.sha512",
     "C:\\Users\\48517\\.nuget\\packages\\shimskiasharp\\1.0.0.1\\shimskiasharp.1.0.0.1.nupkg.sha512",
     "C:\\Users\\48517\\.nuget\\packages\\skiasharp\\2.88.3\\skiasharp.2.88.3.nupkg.sha512",

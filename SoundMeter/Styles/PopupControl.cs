@@ -11,7 +11,7 @@ namespace SoundMeter
         public PopupControl()
         {
             // Set the DataContext to the instance of this control (self)
-            DataContext = new MainWindowViewModel(new DummyAudioInterfaceService());
+            DataContext = new MainWindowViewModel(new NAdioCaptureService());
         }
     }
 }

@@ -968,6 +968,19 @@
           }
         }
       },
+      "NWaves/0.9.6": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/NWaves.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net5.0/NWaves.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "ReactiveUI/18.3.1": {
         "type": "package",
         "dependencies": {
@@ -3010,6 +3023,23 @@
         "naudio-icon.png",
         "naudio.winmm.2.2.1.nupkg.sha512",
         "naudio.winmm.nuspec"
+      ]
+    },
+    "NWaves/0.9.6": {
+      "sha512": "LoVqwy6zgeF9l7Yj9rihWtnbbytZOLtU/lFqjnZRFqOCLJQj60NLFPA4nfvAdzK3PsHeShIw7AuJZKSElcYOGg==",
+      "type": "package",
+      "path": "nwaves/0.9.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net5.0/NWaves.dll",
+        "lib/net5.0/NWaves.xml",
+        "lib/netstandard2.0/NWaves.dll",
+        "lib/netstandard2.0/NWaves.xml",
+        "logo.png",
+        "nwaves.0.9.6.nupkg.sha512",
+        "nwaves.nuspec"
       ]
     },
     "ReactiveUI/18.3.1": {
@@ -5430,7 +5460,8 @@
       "Avalonia.Svg.Skia >= 11.0.0.1",
       "Avalonia.Themes.Fluent >= 11.0.2",
       "Avalonia.Xaml.Interactivity >= 11.0.2",
-      "NAudio >= 2.2.1"
+      "NAudio >= 2.2.1",
+      "NWaves >= 0.9.6"
     ]
   },
   "packageFolders": {
@@ -5513,6 +5544,10 @@
           "NAudio": {
             "target": "Package",
             "version": "[2.2.1, )"
+          },
+          "NWaves": {
+            "target": "Package",
+            "version": "[0.9.6, )"
           }
         },
         "imports": [

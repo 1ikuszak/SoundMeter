@@ -53,3 +53,7 @@ public class RecordingDevice : IDisposable
 
     public override string ToString() => Name;
 }
+
+
+// foreach (var device in RecordingDevice.Enumerate())
+//     Console.WriteLine($"{device?.Index}: {device?.Name}");

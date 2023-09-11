@@ -16,6 +16,8 @@ namespace SoundMeter.ViewModels
 {
     public partial class MainWindowViewModel : ViewModelBase
     {
+        private IAudioCaptureService mAudioCaptureService;
+        
         // Channel configuration list for correct menu
         private List<IGrouping<string, ChannelConfigurationItem>> _channelConfigurations;
         public List<IGrouping<string, ChannelConfigurationItem>> ChannelConfigurations
@@ -23,6 +25,66 @@ namespace SoundMeter.ViewModels
             get => _channelConfigurations;
             set => this.RaiseAndSetIfChanged(ref _channelConfigurations, value);
         }
+
+        #region Audio values
+
+        private string _shortTermLoudness;
+        public string ShortTermLoudness
+        {
+            get => _shortTermLoudness;
+            set => this.RaiseAndSetIfChanged(ref _shortTermLoudness, value);
+        }
+        
+        private string _integratedLoudness;
+        public string IntegratedLoudness
+        {
+            get => _integratedLoudness;
+            set => this.RaiseAndSetIfChanged(ref _integratedLoudness, value);
+        }
+        
+        private string _loudnessRange;
+        public string LoudnessRange
+        {
+            get => _loudnessRange;
+            set => this.RaiseAndSetIfChanged(ref _loudnessRange, value);
+        }
+        
+        private string _realtimeDynamics;
+        public string RealtimeDynamics
+        {
+            get => _realtimeDynamics;
+            set => this.RaiseAndSetIfChanged(ref _realtimeDynamics, value);
+        }
+        
+        private string _averageDynamics;
+        public string AverageDynamics
+        {
+            get => _averageDynamics;
+            set => this.RaiseAndSetIfChanged(ref _averageDynamics, value);
+        }
+        
+        private string _momentaryMaxLoudness;
+        public string MomentaryMaxLoudness
+        {
+            get => _momentaryMaxLoudness;
+            set => this.RaiseAndSetIfChanged(ref _momentaryMaxLoudness, value);
+        }
+        
+        private string _shortTermMaxLoudness;
+        public string ShortTermMaxLoudness
+        {
+            get => _shortTermMaxLoudness;
+            set => this.RaiseAndSetIfChanged(ref _shortTermMaxLoudness, value);
+        }
+        
+        private string _truePeakMax;
+        public string TruePeakMax
+        {
+            get => _truePeakMax;
+            set => this.RaiseAndSetIfChanged(ref _truePeakMax, value);
+        }
+
+        #endregion
         
         // Select button string value
         private string _selectedChannel = "Select"; // Initial value
@@ -48,7 +110,7 @@ namespace SoundMeter.ViewModels
             set => this.RaiseAndSetIfChanged(ref _volumeContainerSize, value);
         }
         
-        public MainWindowViewModel(IAudioInterfaceService audioInterfaceService)
+        public MainWindowViewModel(IAudioCaptureService audioCaptureService)
         {
             ExpanderButtonClickCommand = ReactiveCommand.Create<string>(text =>
             {
@@ -56,7 +118,8 @@ namespace SoundMeter.ViewModels
                 SelectedChannel = text;
             });
             UpdateArrowPosition();
-            Initialize(audioInterfaceService);
+            mAudioCaptureService = new NAdioCaptureService();
+            Initialize(audioCaptureService);
         }
         
         private void UpdateArrowPosition()
@@ -78,13 +141,34 @@ namespace SoundMeter.ViewModels
             tempTimer.Start();
         }
 
-        private async void Initialize(IAudioInterfaceService audioInterfaceService)
+        private async void Initialize(IAudioCaptureService audioCaptureService)
         {
-            var channelConfigurations = await audioInterfaceService.GetChannelConfigurationAsync();
+            var channelConfigurations = await mAudioCaptureService.GetChannelConfigurationAsync();
             ChannelConfigurations = channelConfigurations;
-            
+            StartCapture(0);
         }
         
+        private void StartCapture(int deviceId)
+        {
+            mAudioCaptureService = new NAdioCaptureService(deviceId);
+            
+            // Listen out for chunks of information
+            mAudioCaptureService.AudioChunkAvailable += audioChuckData =>
+            {
+                ShortTermLoudness = $"{audioChuckData.ShortTermLUFS:0.0} LUFS";
+                IntegratedLoudness  = $"{audioChuckData.IntegratedLUFS:0.0} LUFS";
+                LoudnessRange = $"{audioChuckData.LoudnessRange:0.0} LUFS";
+                RealtimeDynamics = $"{audioChuckData.RealtimeDynamics:0.0} LUFS";
+                AverageDynamics = $"{audioChuckData.AverageRealtimeDynamics:0.0} LUFS";
+                MomentaryMaxLoudness = $"{audioChuckData.MomentaryMaxLUFS:0.0} LUFS";
+                ShortTermMaxLoudness = $"{audioChuckData.ShortTermMaxLUFS:0.0} LUFS";
+                TruePeakMax = $"{audioChuckData.TruePeakMax:0.0} dB";
+            };
+        
+            // Start capturing
+            mAudioCaptureService.Start();
+        }
+
         public ICommand ExpanderButtonClickCommand { get; }
 
     }

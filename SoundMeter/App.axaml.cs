@@ -16,12 +16,22 @@ namespace SoundMeter
 
         public override void OnFrameworkInitializationCompleted()
         {
+            // Initialize the dependencies
+            var audioInterface = new NAdioCaptureService();
+            var mainWindowViewModel = new MainWindowViewModel(audioInterface);
+            
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                var audioInterfaceService = new DummyAudioInterfaceService(); // Create an instance of your service
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = new MainWindowViewModel(audioInterfaceService),
+                    DataContext = mainWindowViewModel
+                };
+            }
+            else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
+            {
+                singleViewPlatform.MainView = new MainWindow()
+                {
+                    DataContext = mainWindowViewModel
                 };
             }
 

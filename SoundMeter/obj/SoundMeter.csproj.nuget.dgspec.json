@@ -80,6 +80,10 @@
             "NAudio": {
               "target": "Package",
               "version": "[2.2.1, )"
+            },
+            "NWaves": {
+              "target": "Package",
+              "version": "[0.9.6, )"
             }
           },
           "imports": [

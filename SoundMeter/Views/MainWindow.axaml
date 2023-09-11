@@ -4,14 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:SoundMeter"
-        mc:Ignorable="d" d:DesignWidth="1048" d:DesignHeight="620"
+        mc:Ignorable="d" d:DesignWidth="1048" d:DesignHeight="630"
         Width="1048" Height="620" 
-        x:Class="SoundMeter.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="SoundMeter">
-
-    <Design.DataContext>
+        Title="SoundMeter"
+        x:Class="SoundMeter.Views.MainWindow">
+	
+	<Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:ViewModelBase/>
@@ -107,14 +107,14 @@
 			<!-- dynamic info -->
 			<Grid Grid.Column="1" RowDefinitions="*, Auto">
 				<StackPanel Grid.Row="0" Margin="10,0" Width="220">
-					<controls:LargeLabelControl LargeText="-20.8 LUFS" SmallText="SHORT TERM"></controls:LargeLabelControl>
-					<controls:LargeLabelControl LargeText="-20.8 LUFS" SmallText="INTEGRATED" Background="{DynamicResource Light2}"></controls:LargeLabelControl>
-					<controls:LargeLabelControl LargeText="23.5 LU" SmallText="LOUDNESS RANGE"></controls:LargeLabelControl>
-					<controls:LargeLabelControl LargeText="15.7 LU" SmallText="REALTIME DYNAMICS"></controls:LargeLabelControl>
-					<controls:LargeLabelControl LargeText="21.5 LU" SmallText="AVG. DYNAMICS (PLR)" Margin="0,0,0,20"></controls:LargeLabelControl>
-					<controls:LargeLabelControl Classes="button" LargeText="-9.8 LUFS" SmallText="MOMENTARY MAX"></controls:LargeLabelControl>
-					<controls:LargeLabelControl Classes="button" LargeText="-15.0 LUFS" SmallText="SHORT TERM MAX"></controls:LargeLabelControl>
-					<controls:LargeLabelControl Classes="button" LargeText="-0.3 dB" SmallText="TRUE PEAK MAX" Margin="0,0,0,20"></controls:LargeLabelControl>
+					<controls:LargeLabelControl LargeText="{Binding ShortTermLoudness}" SmallText="SHORT TERM"></controls:LargeLabelControl>
+					<controls:LargeLabelControl LargeText="{Binding IntegratedLoudness}" SmallText="INTEGRATED" Background="{DynamicResource Light2}"></controls:LargeLabelControl>
+					<controls:LargeLabelControl LargeText="{Binding LoudnessRange}" SmallText="LOUDNESS RANGE"></controls:LargeLabelControl>
+					<controls:LargeLabelControl LargeText="{Binding RealtimeDynamics}" SmallText="REALTIME DYNAMICS"></controls:LargeLabelControl>
+					<controls:LargeLabelControl LargeText="{Binding AverageDynamics}" SmallText="AVG. DYNAMICS (PLR)" Margin="0,0,0,20"></controls:LargeLabelControl>
+					<controls:LargeLabelControl Classes="button" LargeText="{Binding MomentaryMaxLoudness}" SmallText="MOMENTARY MAX"></controls:LargeLabelControl>
+					<controls:LargeLabelControl Classes="button" LargeText="{Binding ShortTermMaxLoudness}" SmallText="SHORT TERM MAX"></controls:LargeLabelControl>
+					<controls:LargeLabelControl Classes="button" LargeText="{Binding TruePeakMax}" SmallText="TRUE PEAK MAX" Margin="0,0,0,20"></controls:LargeLabelControl>
 				</StackPanel>
 				<StackPanel Grid.Row="1" Margin="0,8" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 					<Button Classes="small" Margin="0,0,8, 0" Padding="8, 6">
