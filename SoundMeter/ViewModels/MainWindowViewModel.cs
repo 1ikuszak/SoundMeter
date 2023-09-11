@@ -24,7 +24,6 @@ namespace SoundMeter.ViewModels
             set => this.RaiseAndSetIfChanged(ref _channelConfigurations, value);
         }
         
-        
         // Select button string value
         private string _selectedChannel = "Select"; // Initial value
         public string SelectedChannel
@@ -32,7 +31,6 @@ namespace SoundMeter.ViewModels
             get => _selectedChannel;
             set => this.RaiseAndSetIfChanged(ref _selectedChannel, value);
         }
-
         
         // Volume arrow
         private double _volumePercentPosition;
