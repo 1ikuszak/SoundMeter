@@ -77,6 +77,10 @@
               "target": "Package",
               "version": "[11.0.2, )"
             },
+            "LiveChartsCore.SkiaSharpView.Avalonia": {
+              "target": "Package",
+              "version": "[2.0.0-beta.950, )"
+            },
             "NAudio": {
               "target": "Package",
               "version": "[2.2.1, )"

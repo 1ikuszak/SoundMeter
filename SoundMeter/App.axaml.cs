@@ -4,6 +4,9 @@ using Avalonia.Markup.Xaml;
 using SoundMeter.ViewModels;
 using SoundMeter.Views;
 using SoundMeter.Services; // Make sure to import your service namespace
+using LiveChartsCore; 
+using LiveChartsCore.Kernel; 
+using LiveChartsCore.SkiaSharpView; 
 
 namespace SoundMeter
 {
@@ -12,6 +15,13 @@ namespace SoundMeter
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
+            LiveCharts.Configure(config => 
+                config 
+                    .HasMap<City>((city, point) => 
+                    { 
+                        point.Coordinate = new(point.Index, city.Population); 
+                    }) 
+            ); 
         }
 
         public override void OnFrameworkInitializationCompleted()
@@ -37,5 +47,8 @@ namespace SoundMeter
 
             base.OnFrameworkInitializationCompleted();
         }
+        
+        public record City(string Name, double Population);
+        
     }
 }

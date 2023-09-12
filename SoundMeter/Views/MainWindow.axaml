@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:SoundMeter"
+        xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
         mc:Ignorable="d" d:DesignWidth="1048" d:DesignHeight="630"
         Width="1048" Height="620" 
         x:DataType="vm:MainWindowViewModel"
@@ -71,12 +72,12 @@
 						<Label Grid.Column="0" Grid.Row="7">-36 —</Label>
 						<Label Grid.Column="0" Grid.Row="8">-45 —</Label>
 						<Label Grid.Column="0" Grid.Row="9">-54 —</Label>
-						<Label Grid.Column="0" Grid.Row="10"></Label>
+						<Label Grid.Column="0" Grid.Row="10">—</Label>
 						<!-- Volume Bar -->
 						<Grid Name="VolumeBar" Grid.Row="0" Grid.Column="1" Grid.RowSpan="11" RowDefinitions="23*, 37*">
-							<Border Grid.Row="0"  Background="#E72626" Width="45" CornerRadius="4, 4, 0 ,0" Margin="0,0,0,-7"></Border>
-							<Border Grid.Row="1"  Background="#1D1D1D" Width="45" CornerRadius="0, 0, 4 ,4" Margin="0,7,0,0"></Border>
-							<Border Grid.Row="0" Grid.RowSpan="2"  Background="White" VerticalAlignment="Top" Height="{Binding VolumeBarMaskHeight}" Width="45" CornerRadius="0, 0, 4 ,4" Margin="0,7,0,0"></Border>
+							<Border Grid.Row="0"  Background="#E72626" Width="45" Margin="0,0,0,-4"></Border>
+							<Border Grid.Row="1"  Background="#1D1D1D" Width="45" Margin="0,2,0,10"></Border>
+							<Border Grid.Row="0" Grid.RowSpan="2"  Background="White" VerticalAlignment="Top" Height="{Binding VolumeBarMaskHeight}" Width="45"></Border>
 
 						</Grid>
 						<Label Grid.Column="2" Grid.Row="0">—</Label>
@@ -89,7 +90,7 @@
 						<Label Grid.Column="2" Grid.Row="7">—</Label>
 						<Label Grid.Column="2" Grid.Row="8">—</Label>
 						<Label Grid.Column="2" Grid.Row="9">—</Label>
-						<Label Grid.Column="2" Grid.Row="10"></Label>
+						<Label Grid.Column="2" Grid.Row="10">—</Label>
 						<!-- Arrow -->
 						<Canvas Name="VolumeContainer" Grid.Row="0" Grid.Column="3" Grid.RowSpan="11" Width="12">
 							<Image Canvas.Top="{Binding VolumePercentPosition}" Source="{SvgImage /Assets/Images/arrow_meter.svg}" Width="12"/>
@@ -126,7 +127,12 @@
 				</StackPanel>
 			</Grid>
 			<!-- graph -->
-			<Border Grid.Column="2" BorderThickness="1" BorderBrush="Black"></Border>
+			<Border Grid.Column="2" BorderThickness="1" BorderBrush="Transparent">
+				<lvc:CartesianChart
+					Series="{Binding Series}"
+					YAxes="{Binding YAxis}">
+				</lvc:CartesianChart>
+			</Border>
 		</Grid>
 		
 		<!-- Bottom bar -->
